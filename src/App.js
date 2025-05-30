@@ -6,23 +6,6 @@ const OptipymeHomepage = () => {
 
   useEffect(() => {
     setIsLoaded(true);
-    
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in-up');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-
-    const elements = document.querySelectorAll('.reveal-on-scroll');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
   }, []);
 
   const services = [
@@ -33,9 +16,8 @@ const OptipymeHomepage = () => {
       description: 'Soluciones de comunicación avanzadas para empresas y particulares con tecnología de última generación.',
       features: ['Voz en Alta Definición', 'Centralitas Virtuales'],
       price: 'Estudio gratuito',
-      gradient: 'from-blue-500 to-blue-600',
-      borderColor: 'border-green-500',
-      textColor: 'text-white'
+      gradient: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+      textColor: '#ffffff'
     },
     {
       title: 'Electricidad',
@@ -44,9 +26,8 @@ const OptipymeHomepage = () => {
       description: 'Optimización energética para proyectos empresariales y residenciales.',
       features: ['Eficiencia Energética', 'Smart Control'],
       price: 'Consulta gratuita',
-      gradient: 'from-yellow-400 to-orange-500',
-      borderColor: 'border-orange-600',
-      textColor: 'text-gray-900'
+      gradient: 'linear-gradient(135deg, #facc15, #f97316)',
+      textColor: '#111827'
     },
     {
       title: 'Seguridad',
@@ -55,9 +36,8 @@ const OptipymeHomepage = () => {
       description: 'Sistemas de seguridad avanzados con sensores de última generación y videovigilancia.',
       features: ['Tranquilidad', 'Monitoreo 24/7'],
       price: 'Evaluación gratis',
-      gradient: 'from-red-600 to-red-700',
-      borderColor: 'border-purple-600',
-      textColor: 'text-white'
+      gradient: 'linear-gradient(135deg, #dc2626, #b91c1c)',
+      textColor: '#ffffff'
     }
   ];
 
@@ -68,51 +48,241 @@ const OptipymeHomepage = () => {
     { number: '15+', label: 'Años Experiencia', icon: Award }
   ];
 
+  const styles = {
+    hero: {
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'linear-gradient(135deg, #2563eb, #10b981)',
+      color: 'white',
+      position: 'relative',
+      overflow: 'hidden',
+      padding: '0 1rem'
+    },
+    heroContent: {
+      maxWidth: '80rem',
+      margin: '0 auto',
+      textAlign: 'center',
+      position: 'relative',
+      zIndex: 10
+    },
+    mainTitle: {
+      fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
+      fontWeight: '900',
+      lineHeight: '1.1',
+      marginBottom: '2rem',
+      opacity: isLoaded ? 1 : 0,
+      transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
+      transition: 'all 1s ease-out'
+    },
+    subtitle: {
+      fontSize: 'clamp(1.25rem, 4vw, 1.5rem)',
+      color: '#dbeafe',
+      maxWidth: '48rem',
+      margin: '0 auto 3rem',
+      lineHeight: '1.6',
+      opacity: isLoaded ? 1 : 0,
+      transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
+      transition: 'all 1s ease-out 0.3s'
+    },
+    statsGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+      gap: '1.5rem',
+      maxWidth: '64rem',
+      margin: '0 auto',
+      opacity: isLoaded ? 1 : 0,
+      transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
+      transition: 'all 1s ease-out 0.6s'
+    },
+    statCard: {
+      textAlign: 'center',
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      backdropFilter: 'blur(10px)',
+      borderRadius: '1rem',
+      padding: '1.5rem',
+      border: '1px solid rgba(255, 255, 255, 0.2)'
+    },
+    servicesSection: {
+      padding: '5rem 1rem',
+      backgroundColor: '#f9fafb',
+      position: 'relative'
+    },
+    servicesContainer: {
+      maxWidth: '80rem',
+      margin: '0 auto'
+    },
+    sectionTitle: {
+      textAlign: 'center',
+      marginBottom: '5rem'
+    },
+    servicesGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+      gap: '2rem'
+    },
+    serviceCard: {
+      borderRadius: '1.5rem',
+      overflow: 'hidden',
+      boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+      transition: 'all 0.3s ease',
+      cursor: 'pointer'
+    },
+    serviceCardHover: {
+      transform: 'translateY(-8px) scale(1.02)',
+      boxShadow: '0 35px 60px -12px rgba(0, 0, 0, 0.35)'
+    },
+    serviceHeader: {
+      padding: '1.5rem',
+      position: 'relative',
+      overflow: 'hidden'
+    },
+    serviceBody: {
+      backgroundColor: 'white',
+      padding: '2rem'
+    },
+    ctaSection: {
+      padding: '5rem 1rem',
+      background: 'linear-gradient(135deg, #2563eb, #10b981)',
+      color: 'white',
+      textAlign: 'center'
+    },
+    testimonialSection: {
+      padding: '5rem 1rem',
+      background: 'linear-gradient(135deg, #ef4444, #f97316)',
+      color: 'white',
+      textAlign: 'center'
+    },
+    footer: {
+      backgroundColor: '#111827',
+      color: 'white',
+      padding: '4rem 1rem',
+      textAlign: 'center'
+    },
+    button: {
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      border: '1px solid rgba(255, 255, 255, 0.2)',
+      color: 'white',
+      padding: '1rem 2.5rem',
+      borderRadius: '1rem',
+      fontSize: '1.125rem',
+      fontWeight: '700',
+      textDecoration: 'none',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '0.75rem',
+      transition: 'all 0.3s ease',
+      maxWidth: '32rem',
+      width: '100%',
+      justifyContent: 'center'
+    },
+    backgroundElements: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      overflow: 'hidden',
+      zIndex: 1
+    }
+  };
+
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div style={{ minHeight: '100vh', backgroundColor: '#f9fafb' }}>
       {/* Hero Section */}
-      <header className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 to-green-500 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-32 h-32 bg-white/10 rounded-full animate-pulse"></div>
-          <div className="absolute top-40 right-16 w-24 h-24 bg-white/5 rounded-full animate-bounce"></div>
-          <div className="absolute bottom-32 left-1/4 w-20 h-20 bg-white/10 rounded-full animate-pulse"></div>
-          <div className="absolute top-1/2 right-1/4 w-16 h-16 bg-white/5 rounded-full animate-bounce"></div>
+      <header style={styles.hero}>
+        <div style={styles.backgroundElements}>
+          <div style={{
+            position: 'absolute',
+            top: '5rem',
+            left: '5rem',
+            width: '8rem',
+            height: '8rem',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            borderRadius: '50%',
+            animation: 'pulse 2s infinite'
+          }}></div>
+          <div style={{
+            position: 'absolute',
+            top: '10rem',
+            right: '4rem',
+            width: '6rem',
+            height: '6rem',
+            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+            borderRadius: '50%',
+            animation: 'bounce 1s infinite',
+            animationDelay: '2s'
+          }}></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div style={styles.heroContent}>
           {/* Logo */}
-          <div className={`mb-8 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="inline-block relative">
-              <div className="text-8xl font-black text-white mb-4">
-                <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">OPTI</span>
-                <span className="text-white">PYME</span>
-              </div>
-              <div className="text-2xl font-light text-blue-200">Solutions</div>
+          <div style={{ marginBottom: '2rem' }}>
+            <div style={{
+              fontSize: 'clamp(4rem, 10vw, 6rem)',
+              fontWeight: '900',
+              marginBottom: '1rem',
+              opacity: isLoaded ? 1 : 0,
+              transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
+              transition: 'all 1s ease-out'
+            }}>
+              <span style={{
+                background: 'linear-gradient(45deg, #facc15, #f97316)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>OPTI</span>
+              <span>PYME</span>
             </div>
+            <div style={{
+              fontSize: '1.5rem',
+              fontWeight: '300',
+              color: '#bfdbfe',
+              opacity: isLoaded ? 1 : 0,
+              transition: 'all 1s ease-out 0.2s'
+            }}>Solutions</div>
           </div>
 
           {/* Title */}
-          <h1 className={`text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-6 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h1 style={styles.mainTitle}>
             Tecnología que
-            <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent animate-pulse">
+            <div style={{
+              background: 'linear-gradient(45deg, #facc15, #f97316)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              animation: 'pulse 2s infinite'
+            }}>
               Transforma
-            </span>
+            </div>
             Empresas
           </h1>
 
           {/* Subtitle */}
-          <p className={`text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed mb-8 transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            Revoluciona tu negocio con soluciones tecnológicas de <span className="font-semibold text-white">última generación</span>. 
+          <p style={styles.subtitle}>
+            Revoluciona tu negocio con soluciones tecnológicas de <strong>última generación</strong>. 
             Líderes en telefonía, instalaciones eléctricas fotovoltaicas y seguridad.
           </p>
 
           {/* Stats */}
-          <div className={`grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto transition-all duration-1000 delay-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div style={styles.statsGrid}>
             {stats.map((stat, index) => (
-              <div key={index} className="text-center backdrop-blur-sm bg-white/10 rounded-2xl p-4 border border-white/20">
-                <div className="text-3xl md:text-4xl font-black text-white mb-2">{stat.number}</div>
-                <div className="text-blue-200 font-medium text-sm">{stat.label}</div>
+              <div key={index} style={styles.statCard}>
+                <div style={{
+                  fontSize: 'clamp(2rem, 5vw, 3rem)',
+                  fontWeight: '900',
+                  marginBottom: '0.5rem'
+                }}>
+                  {stat.number}
+                </div>
+                <div style={{
+                  color: '#bfdbfe',
+                  fontWeight: '500',
+                  fontSize: '0.875rem'
+                }}>
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
@@ -120,130 +290,222 @@ const OptipymeHomepage = () => {
       </header>
 
       {/* Services Section */}
-      <main className="py-20 md:py-32 relative">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 right-10 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 left-10 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <div className="reveal-on-scroll inline-block px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold mb-4">
+      <main style={styles.servicesSection}>
+        <div style={styles.servicesContainer}>
+          <div style={styles.sectionTitle}>
+            <div style={{
+              display: 'inline-block',
+              padding: '0.5rem 1rem',
+              backgroundColor: '#dbeafe',
+              color: '#1e40af',
+              borderRadius: '9999px',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              marginBottom: '1rem'
+            }}>
               Nuestras Especialidades
             </div>
-            <h2 className="reveal-on-scroll text-4xl md:text-5xl font-black text-gray-900 mb-6">
-              Soluciones <span className="bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text text-transparent">Innovadoras</span>
+            <h2 style={{
+              fontSize: 'clamp(2.5rem, 6vw, 3rem)',
+              fontWeight: '900',
+              color: '#111827',
+              marginBottom: '1.5rem'
+            }}>
+              Soluciones <span style={{
+                background: 'linear-gradient(45deg, #2563eb, #10b981)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>Innovadoras</span>
             </h2>
-            <p className="reveal-on-scroll text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p style={{
+              fontSize: '1.25rem',
+              color: '#4b5563',
+              maxWidth: '48rem',
+              margin: '0 auto',
+              lineHeight: '1.6'
+            }}>
               Cada servicio está diseñado para catapultar tu empresa hacia el futuro digital con tecnología que supera cualquier expectativa.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div style={styles.servicesGrid}>
             {services.map((service, index) => (
-              <article 
+              <div 
                 key={index}
-                className="reveal-on-scroll group relative transform hover:scale-105 transition-all duration-500"
+                style={styles.serviceCard}
+                onMouseEnter={(e) => Object.assign(e.currentTarget.style, styles.serviceCardHover)}
+                onMouseLeave={(e) => Object.assign(e.currentTarget.style, styles.serviceCard)}
               >
-                <div className={`bg-gradient-to-br ${service.gradient} rounded-3xl shadow-xl hover:shadow-2xl overflow-hidden border-t-4 ${service.borderColor} transition-all duration-500 group-hover:-translate-y-2`}>
-                  <div className={`p-4 ${service.textColor} relative overflow-hidden`}>
-                    <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -mr-8 -mt-8"></div>
-                    <div className="absolute bottom-0 left-0 w-12 h-12 bg-white/5 rounded-full -ml-6 -mb-6"></div>
-                    
-                    <div className="relative z-10">
-                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-3 group-hover:rotate-12 transition-transform duration-300">
-                        <service.icon 
-                          size={24}
-                          className={service.textColor}
-                        />
+                <div style={{
+                  ...styles.serviceHeader,
+                  background: service.gradient,
+                  color: service.textColor
+                }}>
+                  <div style={{
+                    width: '3rem',
+                    height: '3rem',
+                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                    borderRadius: '0.75rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: '0.75rem'
+                  }}>
+                    <service.icon size={24} />
+                  </div>
+                  <h3 style={{
+                    fontSize: '1.125rem',
+                    fontWeight: '700',
+                    marginBottom: '0.25rem'
+                  }}>
+                    {service.title}
+                  </h3>
+                  <p style={{
+                    fontSize: '0.75rem',
+                    opacity: 0.9,
+                    fontWeight: '500'
+                  }}>
+                    {service.subtitle}
+                  </p>
+                </div>
+
+                <div style={styles.serviceBody}>
+                  <p style={{
+                    color: '#374151',
+                    lineHeight: '1.6',
+                    marginBottom: '1.5rem'
+                  }}>
+                    {service.description}
+                  </p>
+
+                  <div style={{ marginBottom: '1.5rem' }}>
+                    {service.features.map((feature, idx) => (
+                      <div key={idx} style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.75rem',
+                        marginBottom: '0.75rem'
+                      }}>
+                        <Check style={{ width: '1.25rem', height: '1.25rem', color: '#059669' }} />
+                        <span style={{ color: '#374151', fontWeight: '500' }}>{feature}</span>
                       </div>
-                      <h3 className={`text-lg font-bold mb-1 ${service.textColor}`}>
-                        {service.title}
-                      </h3>
-                      <p className={`text-xs opacity-90 font-medium ${service.textColor}`}>
-                        {service.subtitle}
-                      </p>
-                    </div>
+                    ))}
                   </div>
 
-                  <div className="bg-white p-8">
-                    <p className="text-gray-700 leading-relaxed mb-6">
-                      {service.description}
-                    </p>
-
-                    <div className="space-y-3 mb-6">
-                      {service.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center space-x-3">
-                          <Check className="w-5 h-5 text-green-600 flex-shrink-0" />
-                          <span className="text-gray-700 font-medium">{feature}</span>
-                        </div>
-                      ))}
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between'
+                  }}>
+                    <div style={{
+                      fontSize: '1.5rem',
+                      fontWeight: '700',
+                      color: '#111827'
+                    }}>
+                      {service.price}
                     </div>
-
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="text-2xl font-bold text-gray-900">{service.price}</div>
-                      </div>
-                      <div className="flex items-center text-blue-600 group-hover:translate-x-2 transition-transform duration-300">
-                        <span className="font-semibold mr-2">Explorar</span>
-                        <ArrowRight className="w-5 h-5" />
-                      </div>
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      color: '#2563eb',
+                      fontWeight: '600'
+                    }}>
+                      <span style={{ marginRight: '0.5rem' }}>Explorar</span>
+                      <ArrowRight style={{ width: '1.25rem', height: '1.25rem' }} />
                     </div>
                   </div>
                 </div>
-              </article>
+              </div>
             ))}
           </div>
         </div>
       </main>
 
       {/* Testimonials */}
-      <section className="py-20 bg-gradient-to-br from-red-500 to-orange-500 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-yellow-400 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-green-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-        </div>
+      <section style={styles.testimonialSection}>
+        <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
+          <h2 style={{
+            fontSize: 'clamp(2.5rem, 6vw, 3rem)',
+            fontWeight: '900',
+            marginBottom: '2rem'
+          }}>
+            La Confianza de <span style={{ color: '#facc15' }}>Líderes</span>
+          </h2>
+          <p style={{
+            fontSize: '1.25rem',
+            color: '#fee2e2',
+            maxWidth: '48rem',
+            margin: '0 auto 4rem'
+          }}>
+            Comparte tu experiencia con nosotros y ayuda a otros empresarios a tomar la mejor decisión
+          </p>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="reveal-on-scroll text-4xl md:text-5xl font-black mb-8">
-              La Confianza de <span className="text-yellow-400">Líderes</span>
-            </h2>
-            <p className="reveal-on-scroll text-xl text-red-100 max-w-3xl mx-auto">
-              Comparte tu experiencia con nosotros y ayuda a otros empresarios a tomar la mejor decisión
-            </p>
-          </div>
-
-          <div className="max-w-2xl mx-auto mb-16">
-            <div className="reveal-on-scroll backdrop-blur-sm bg-white/10 rounded-3xl p-8 border border-white/20">
-              <div className="flex items-center mb-6">
-                <div className="flex space-x-1">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button 
-                      key={star}
-                      className="star-rating w-6 h-6 transition-colors duration-200"
-                    >
-                      <Star className="w-6 h-6 text-white/30 hover:text-yellow-400 cursor-pointer transition-colors" />
-                    </button>
-                  ))}
-                </div>
-                <span className="ml-3 text-red-100 font-medium">Tu calificación</span>
+          <div style={{
+            maxWidth: '42rem',
+            margin: '0 auto',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            borderRadius: '1.5rem',
+            padding: '2rem',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              marginBottom: '1.5rem',
+              justifyContent: 'center',
+              gap: '0.75rem'
+            }}>
+              <div style={{ display: 'flex', gap: '0.25rem' }}>
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star key={star} style={{ 
+                    width: '1.5rem', 
+                    height: '1.5rem', 
+                    color: 'rgba(255, 255, 255, 0.3)',
+                    cursor: 'pointer'
+                  }} />
+                ))}
               </div>
+              <span style={{ color: '#fee2e2', fontWeight: '500' }}>Tu calificación</span>
+            </div>
 
-              <div className="mb-6">
-                <blockquote className="text-lg leading-relaxed italic text-white/80 min-h-[100px] flex items-center justify-center border-2 border-dashed border-white/30 rounded-xl p-6">
-                  "Haz clic en las estrellas y comparte tu experiencia aquí..."
-                </blockquote>
+            <blockquote style={{
+              fontSize: '1.125rem',
+              fontStyle: 'italic',
+              color: 'rgba(255, 255, 255, 0.8)',
+              minHeight: '100px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: '2px dashed rgba(255, 255, 255, 0.3)',
+              borderRadius: '0.75rem',
+              padding: '1.5rem',
+              marginBottom: '1.5rem'
+            }}>
+              "Haz clic en las estrellas y comparte tu experiencia aquí..."
+            </blockquote>
+
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{
+                width: '3rem',
+                height: '3rem',
+                borderRadius: '50%',
+                background: 'linear-gradient(45deg, #2563eb, #10b981)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.125rem',
+                fontWeight: '700',
+                marginRight: '1rem',
+                border: '2px dashed rgba(255, 255, 255, 0.3)'
+              }}>
+                ?
               </div>
-
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-600 to-green-500 flex items-center justify-center text-white font-bold text-lg mr-4 border-2 border-dashed border-white/30">
-                  ?
+              <div style={{ textAlign: 'left' }}>
+                <div style={{ fontWeight: '700', fontSize: '1.125rem', color: 'rgba(255, 255, 255, 0.8)' }}>
+                  Tu Nombre
                 </div>
-                <div>
-                  <div className="font-bold text-lg text-white/80">Tu Nombre</div>
-                  <div className="text-red-100">Tu Empresa</div>
-                </div>
+                <div style={{ color: '#fee2e2' }}>Tu Empresa</div>
               </div>
             </div>
           </div>
@@ -251,104 +513,244 @@ const OptipymeHomepage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-green-500 text-white relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl animate-pulse"></div>
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="reveal-on-scroll text-4xl md:text-6xl font-black leading-tight mb-8">
-            ¿Preparado para el 
-            <span className="bg-gradient-to-r from-green-500 to-orange-500 bg-clip-text text-transparent"> Futuro</span>?
+      <section style={styles.ctaSection}>
+        <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
+          <h2 style={{
+            fontSize: 'clamp(2.5rem, 8vw, 4rem)',
+            fontWeight: '900',
+            lineHeight: '1.1',
+            marginBottom: '2rem'
+          }}>
+            ¿Preparado para el{' '}
+            <span style={{
+              background: 'linear-gradient(45deg, #10b981, #f97316)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}>
+              Futuro
+            </span>?
           </h2>
           
-          <p className="reveal-on-scroll text-xl md:text-2xl text-blue-100 leading-relaxed mb-12">
-            Más de <span className="font-bold text-white">500 empresas</span> ya han revolucionado su negocio. 
-            <span className="block font-semibold text-green-500">Tu turno es ahora.</span>
+          <p style={{
+            fontSize: 'clamp(1.25rem, 4vw, 1.5rem)',
+            color: '#bfdbfe',
+            lineHeight: '1.6',
+            marginBottom: '3rem'
+          }}>
+            Más de <strong style={{ color: 'white' }}>500 empresas</strong> ya han revolucionado su negocio.{' '}
+            <div style={{ fontWeight: '600', color: '#10b981' }}>Tu turno es ahora.</div>
           </p>
 
-          <div className="reveal-on-scroll flex justify-center mb-16">
-            <a href="tel:+34641119677" className="group backdrop-blur-sm bg-white/10 border border-white/20 text-white px-10 py-5 rounded-2xl font-black text-xl hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center justify-center w-full max-w-lg">
-              <Phone className="w-6 h-6 mr-4 group-hover:rotate-12 transition-transform" />
+          <div style={{ marginBottom: '4rem' }}>
+            <a 
+              href="tel:+34641119677" 
+              style={styles.button}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'white';
+                e.target.style.color = '#111827';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                e.target.style.color = 'white';
+              }}
+            >
+              <Phone style={{ width: '1.5rem', height: '1.5rem' }} />
               Solicita tu Consultoría Gratuita
             </a>
           </div>
 
-          <div className="reveal-on-scroll grid md:grid-cols-3 gap-6">
-            <div className="backdrop-blur-sm bg-white/10 rounded-2xl p-6 border border-white/20">
-              <Check className="w-12 h-12 mx-auto mb-4" />
-              <h3 className="font-bold text-lg mb-2">Instalación Gratuita</h3>
-              <p className="text-blue-200 text-sm">Sin costes ocultos ni sorpresas</p>
-            </div>
-            <div className="backdrop-blur-sm bg-white/10 rounded-2xl p-6 border border-white/20">
-              <Clock className="w-12 h-12 mx-auto mb-4" />
-              <h3 className="font-bold text-lg mb-2">Soporte 24/7/365</h3>
-              <p className="text-blue-200 text-sm">Equipo experto siempre disponible</p>
-            </div>
-            <div className="backdrop-blur-sm bg-white/10 rounded-2xl p-6 border border-white/20">
-              <TrendingUp className="w-12 h-12 mx-auto mb-4" />
-              <h3 className="font-bold text-lg mb-2">Ahorro Garantizado</h3>
-              <p className="text-blue-200 text-sm">En menos de 12 meses</p>
-            </div>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: '1.5rem'
+          }}>
+            {[
+              { icon: Check, title: 'Instalación Gratuita', desc: 'Sin costes ocultos ni sorpresas' },
+              { icon: Clock, title: 'Soporte 24/7/365', desc: 'Equipo experto siempre disponible' },
+              { icon: TrendingUp, title: 'Ahorro Garantizado', desc: 'En menos de 12 meses' }
+            ].map((item, index) => (
+              <div key={index} style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                borderRadius: '1rem',
+                padding: '1.5rem',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                textAlign: 'center'
+              }}>
+                <item.icon style={{ width: '3rem', height: '3rem', margin: '0 auto 1rem' }} />
+                <h3 style={{ fontWeight: '700', fontSize: '1.125rem', marginBottom: '0.5rem' }}>
+                  {item.title}
+                </h3>
+                <p style={{ color: '#bfdbfe', fontSize: '0.875rem' }}>{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-50"></div>
-          <div className="absolute top-20 right-10 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 mb-12">
-            <div>
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-green-500 rounded-2xl flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">O</span>
+      <footer style={styles.footer}>
+        <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '3rem',
+            marginBottom: '3rem'
+          }}>
+            <div style={{ textAlign: 'left' }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                marginBottom: '1.5rem',
+                justifyContent: 'center'
+              }}>
+                <div style={{
+                  width: '3rem',
+                  height: '3rem',
+                  background: 'linear-gradient(45deg, #2563eb, #10b981)',
+                  borderRadius: '1rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <span style={{ fontSize: '1.25rem', fontWeight: '700' }}>O</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-black">Optipyme Solutions</h3>
-                  <p className="text-blue-300">Tecnología que transforma empresas</p>
+                  <h3 style={{ fontSize: '1.5rem', fontWeight: '900' }}>Optipyme Solutions</h3>
+                  <p style={{ color: '#93c5fd' }}>Tecnología que transforma empresas</p>
                 </div>
               </div>
               
-              <p className="text-gray-300 leading-relaxed mb-6 max-w-md">
+              <p style={{
+                color: '#d1d5db',
+                lineHeight: '1.6',
+                maxWidth: '28rem',
+                margin: '0 auto 1.5rem'
+              }}>
                 Líderes en soluciones tecnológicas empresariales. Más de una década transformando 
                 negocios con telefonía avanzada, optimización energética y seguridad.
               </p>
             </div>
 
-            <div className="flex flex-col justify-center">
-              <h4 className="text-2xl font-bold mb-6 text-center">¿Listo para transformar tu empresa?</h4>
-              <a href="mailto:optipymesolutions@gmail.com?subject=Solicitud de Consulta Gratuita&body=Hola, me gustaría solicitar una consulta gratuita para mi empresa." 
-                 className="bg-gradient-to-r from-blue-600 to-green-500 hover:from-blue-700 hover:to-green-600 text-white px-8 py-4 rounded-2xl font-bold text-lg text-center transition-all duration-300 flex items-center justify-center">
-                <span className="mr-3">📧</span>
+            <div style={{ textAlign: 'center' }}>
+              <h4 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1.5rem' }}>
+                ¿Listo para transformar tu empresa?
+              </h4>
+              <a 
+                href="mailto:optipymesolutions@gmail.com?subject=Solicitud de Consulta Gratuita&body=Hola, me gustaría solicitar una consulta gratuita para mi empresa."
+                style={{
+                  background: 'linear-gradient(45deg, #2563eb, #10b981)',
+                  color: 'white',
+                  padding: '1rem 2rem',
+                  borderRadius: '1rem',
+                  fontWeight: '700',
+                  fontSize: '1.125rem',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.75rem',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = 'linear-gradient(45deg, #1d4ed8, #059669)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = 'linear-gradient(45deg, #2563eb, #10b981)';
+                }}
+              >
+                <span style={{ fontSize: '1.5rem' }}>📧</span>
                 Solicita tu Consulta Gratuita
               </a>
             </div>
           </div>
 
-          <div className="border-t border-gray-800 pt-8 flex flex-col lg:flex-row justify-between items-center gap-6">
-            <div className="text-center lg:text-left">
-              <p className="text-gray-400 mb-2">© 2025 Optipyme Solutions. Todos los derechos reservados.</p>
-              <div className="flex flex-wrap justify-center lg:justify-start gap-6 text-sm">
-                <a href="/privacidad" className="text-gray-400 hover:text-white transition-colors">Política de Privacidad</a>
-                <a href="/terminos" className="text-gray-400 hover:text-white transition-colors">Términos de Uso</a>
-                <a href="/cookies" className="text-gray-400 hover:text-white transition-colors">Cookies</a>
+          <div style={{
+            borderTop: '1px solid #374151',
+            paddingTop: '2rem',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '1.5rem'
+          }}>
+            <div style={{ textAlign: 'center' }}>
+              <p style={{ color: '#9ca3af', marginBottom: '0.5rem' }}>
+                © 2025 Optipyme Solutions. Todos los derechos reservados.
+              </p>
+              <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                gap: '1.5rem',
+                fontSize: '0.875rem'
+              }}>
+                <a href="/privacidad" style={{ color: '#9ca3af', textDecoration: 'none' }}>
+                  Política de Privacidad
+                </a>
+                <a href="/terminos" style={{ color: '#9ca3af', textDecoration: 'none' }}>
+                  Términos de Uso
+                </a>
+                <a href="/cookies" style={{ color: '#9ca3af', textDecoration: 'none' }}>
+                  Cookies
+                </a>
               </div>
             </div>
 
-            <div className="flex space-x-4">
-              <a href="https://wa.me/34641119677" className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center hover:bg-green-600 transition-colors text-white font-bold">
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              <a 
+                href="https://wa.me/34641119677"
+                style={{
+                  width: '2.5rem',
+                  height: '2.5rem',
+                  backgroundColor: '#10b981',
+                  borderRadius: '0.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1.25rem',
+                  textDecoration: 'none',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => e.target.style.backgroundColor = '#059669'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = '#10b981'}
+              >
                 📱
               </a>
-              <a href="https://www.instagram.com/optipymesolutions/" className="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center hover:bg-purple-600 transition-colors text-white font-bold">
+              <a 
+                href="https://www.instagram.com/optipymesolutions/"
+                style={{
+                  width: '2.5rem',
+                  height: '2.5rem',
+                  background: 'linear-gradient(45deg, #8b5cf6, #ec4899)',
+                  borderRadius: '0.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1.25rem',
+                  textDecoration: 'none',
+                  transition: 'all 0.3s ease'
+                }}
+              >
                 📷
               </a>
-              <a href="mailto:optipymesolutions@gmail.com" className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors text-white font-bold">
+              <a 
+                href="mailto:optipymesolutions@gmail.com"
+                style={{
+                  width: '2.5rem',
+                  height: '2.5rem',
+                  backgroundColor: '#3b82f6',
+                  borderRadius: '0.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1.25rem',
+                  textDecoration: 'none',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => e.target.style.backgroundColor = '#2563eb'}
+                onMouseLeave={(e) => e.target.style.backgroundColor
+                onMouseLeave={(e) => e.target.style.backgroundColor = '#3b82f6'}
+              >
                 📧
               </a>
             </div>
@@ -356,41 +758,49 @@ const OptipymeHomepage = () => {
         </div>
       </footer>
 
-      {/* Custom Styles */}
-      <style>{`
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(60px);
-          }
-          to {
+      {/* CSS Animations */}
+      <style jsx>{`
+        @keyframes pulse {
+          0%, 100% {
             opacity: 1;
-            transform: translateY(0);
+          }
+          50% {
+            opacity: 0.5;
           }
         }
 
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out forwards;
+        @keyframes bounce {
+          0%, 100% {
+            transform: translateY(-25%);
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+          }
+          50% {
+            transform: none;
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+          }
         }
 
-        .reveal-on-scroll {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: all 0.8s ease-out;
+        * {
+          box-sizing: border-box;
         }
 
-        .reveal-on-scroll.animate-fade-in-up {
-          opacity: 1;
-          transform: translateY(0);
+        body {
+          margin: 0;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+            'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+            sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
         }
 
         html {
           scroll-behavior: smooth;
         }
 
-        .star-rating:hover .lucide-star {
-          color: #facc15 !important;
-          fill: #facc15 !important;
+        @media (max-width: 768px) {
+          .responsive-grid {
+            grid-template-columns: 1fr !important;
+          }
         }
       `}</style>
     </div>
