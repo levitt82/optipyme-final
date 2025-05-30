@@ -748,7 +748,6 @@ const OptipymeHomepage = () => {
                   transition: 'all 0.3s ease'
                 }}
                 onMouseEnter={(e) => e.target.style.backgroundColor = '#2563eb'}
-                onMouseLeave={(e) => e.target.style.backgroundColor
                 onMouseLeave={(e) => e.target.style.backgroundColor = '#3b82f6'}
               >
                 📧
