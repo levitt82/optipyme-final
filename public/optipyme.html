@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optipyme Solutions - Tecnología que Transforma Empresas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2563eb, #10b981);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 5rem;
+            left: 5rem;
+            width: 8rem;
+            height: 8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 10rem;
+            right: 4rem;
+            width: 6rem;
+            height: 6rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: bounce 1s infinite;
+            animation-delay: 2s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-25%); }
+            50% { transform: translateY(0); }
+        }
+
+        .hero-content {
+            max-width: 80rem;
+            z-index: 10;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .logo .opti {
+            background: linear-gradient(45deg, #facc15, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #bfdbfe;
+            margin-bottom: 2rem;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #facc15, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s infinite;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #dbeafe;
+            max-width: 48rem;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #bfdbfe;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .services-section {
+            padding: 5rem 2rem;
+            background: #f9fafb;
+        }
+
+        .container {
+            max-width: 80rem;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #2563eb, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-description {
+            font-size: 1.25rem;
+            color: #4b5563;
+            max-width: 48rem;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.35);
+        }
+
+        .service-header {
+            padding: 1.5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-header.telefonia {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .service-header.electricidad {
+            background: linear-gradient(135deg, #facc15, #f97316);
+            color: #111827;
+        }
+
+        .service-header.seguridad {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+        }
+
+        .service-icon {
+            width: 3rem;
+            height: 3rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+            font-size: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .service-subtitle {
+            font-size: 0.75rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .service-body {
+            background: white;
+            padding: 2rem;
+        }
+
+        .service-description {
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list {
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .check-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: #059669;
+        }
+
+        .feature-text {
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .service-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .service-cta {
+            display: flex;
+            align-items: center;
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .testimonial-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            text-align: center;
+        }
+
+        .testimonial-card {
+            max-width: 42rem;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stars {
+            display: flex;
+            gap: 0.25rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .star {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .star:hover {
+            color: #facc15;
+        }
+
+        .testimonial-text {
+            font-size: 1.125rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #2563eb, #10b981);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.5rem;
+            color: #bfdbfe;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 1rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            margin-bottom: 4rem;
+        }
+
+        .cta-button:hover {
+            background: white;
+            color: #111827;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-desc {
+            color: #bfdbfe;
+            font-size: 0.875rem;
+        }
+
+        .footer {
+            background: #111827;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 80rem;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(45deg, #2563eb, #10b981);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .footer-cta-button {
+            background: linear-gradient(45deg, #2563eb, #10b981);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-cta-button:hover {
+            background: linear-gradient(45deg, #1d4ed8, #059669);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link.whatsapp {
+            background: #10b981;
+        }
+
+        .social-link.whatsapp:hover {
+            background: #059669;
+        }
+
+        .social-link.instagram {
+            background: linear-gradient(45deg, #8b5cf6, #ec4899);
+        }
+
+        .social-link.email {
+            background: #3b82f6;
+        }
+
+        .social-link.email:hover {
+            background: #2563eb;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .cta-title {
+                font-size: 2.5rem;
+            }
+            
+            .logo {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <!-- Logo -->
+            <div class="logo">
+                <span class="opti">OPTI</span><span>PYME</span>
+            </div>
+            <div class="logo-subtitle">Solutions</div>
+
+            <!-- Title -->
+            <h1 class="main-title">
+                Tecnología que<br>
+                <span class="highlight">Transforma</span><br>
+                Empresas
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="subtitle">
+                Revoluciona tu negocio con soluciones tecnológicas de <strong>última generación</strong>. 
+                Líderes en telefonía, instalaciones eléctricas fotovoltaicas y seguridad.
+            </p>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Clientes Activos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Clientes Satisfechos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Soporte</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Años Experiencia</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge">Nuestras Especialidades</div>
+                <h2 class="section-title">
+                    Soluciones <span class="gradient-text">Innovadoras</span>
+                </h2>
+                <p class="section-description">
+                    Cada servicio está diseñado para catapultar tu empresa hacia el futuro digital con tecnología que supera cualquier expectativa.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Telefonía -->
+                <div class="service-card">
+                    <div class="service-header telefonia">
+                        <div class="service-icon">📞</div>
+                        <h3 class="service-title">Telefonía</h3>
+                        <p class="service-subtitle">VoIP Empresarial</p>
+                    </div>
+                    <div class="service-body">
+                        <p class="service-description">
+                            Soluciones de comunicación avanzadas para empresas y particulares con tecnología de última generación.
+                        </p>
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <span class="check-icon">✓</span>
+                                <span class="feature-text">Voz en Alta Definición</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="check-icon">✓</span>
+                                <span class="feature-text">Centralitas Virtuales</span>
+                            </div>
+                        </div>
+                        <div class="service-footer">
+                            <div class="service-price">Estudio gratuito</div>
+                            <a href="#" class="service-cta">
+                                Explorar →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Electricidad -->
+                <div class="service-card">
+                    <div class="service-header electricidad">
+                        <div class="service-icon">💡</div>
+                        <h3 class="service-title">Electricidad</h3>
+                        <p class="service-subtitle">Ahorro Energético</p>
+                    </div>
+                    <div class="service-body">
+                        <p class="service-description">
+                            Optimización energética para proyectos empresariales y residenciales.
+                        </p>
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <span class="check-icon">✓</span>
+                                <span class="feature-text">Eficiencia Energética</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="check-icon">✓</span>
+                                <span class="feature-text">Smart Control</span>
+                            </div>
+                        </div>
+                        <div class="service-footer">
+                            <div class="service-price">Consulta gratuita</div>
+                            <a href="#" class="service-cta">
+                                Explorar →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seguridad -->
+                <div class="service-card">
+                    <div class="service-header seguridad">
+                        <div class="service-icon">🛡️</div>
+                        <h3 class="service-title">Seguridad</h3>
+                        <p class="service-subtitle">Vigilancia</p>
+                    </div>
+                    <div class="service-body">
+                        <p class="service-description">
+                            Sistemas de seguridad avanzados con sensores de última generación y videovigilancia.
+                        </p>
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <span class="check-icon">✓</span>
+                                <span class="feature-text">Tranquilidad</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="check-icon">✓</span>
+                                <span class="feature-text">Monitoreo 24/7</span>
+                            </div>
+                        </div>
+                        <div class="service-footer">
+                            <div class="service-price">Evaluación gratis</div>
+                            <a href="#" class="service-cta">
+                                Explorar →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonial-section">
+        <div class="container">
+            <h2 class="section-title">
+                La Confianza de <span style="color: #facc15;">Líderes</span>
+            </h2>
+            <p style="font-size: 1.25rem; color: #fee2e2; margin-bottom: 4rem;">
+                Comparte tu experiencia con nosotros y ayuda a otros empresarios a tomar la mejor decisión
+            </p>
+
+            <div class="testimonial-card">
+                <div class="stars">
+                    <span class="star">⭐</span>
+                    <span class="star">⭐</span>
+                    <span class="star">⭐</span>
+                    <span class="star">⭐</span>
+                    <span class="star">⭐</span>
+                    <span style="margin-left: 0.75rem; color: #fee2e2;">Tu calificación</span>
+                </div>
+
+                <div class="testimonial-text">
+                    "Haz clic en las estrellas y comparte tu experiencia aquí..."
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <div style="width: 3rem; height: 3rem; border-radius: 50%; background: linear-gradient(45deg, #2563eb, #10b981); display: flex; align-items: center; justify-content: center; font-weight: 700; margin-right: 1rem; border: 2px dashed rgba(255, 255, 255, 0.3);">
+                        ?
+                    </div>
+                    <div style="text-align: left;">
+                        <div style="font-weight: 700; font-size: 1.125rem;">Tu Nombre</div>
+                        <div style="color: #fee2e2;">Tu Empresa</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">
+                ¿Preparado para el <span class="highlight">Futuro</span>?
+            </h2>
+            
+            <p class="cta-subtitle">
+                Más de <strong>500 empresas</strong> ya han revolucionado su negocio.<br>
+                <span style="font-weight: 600; color: #10b981;">Tu turno es ahora.</span>
+            </p>
+
+            <a href="tel:+34641119677" class="cta-button">
+                📞 Solicita tu Consultoría Gratuita
+            </a>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">✅</div>
+                    <h3 class="benefit-title">Instalación Gratuita</h3>
+                    <p class="benefit-desc">Sin costes ocultos ni sorpresas</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⏰</div>
+                    <h3 class="benefit-title">Soporte 24/7/365</h3>
+                    <p class="benefit-desc">Equipo experto siempre disponible</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h3 class="benefit-title">Ahorro Garantizado</h3>
+                    <p class="benefit-desc">En menos de 12 meses</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <div class="footer-logo">O</div>
+                        <div>
+                            <h3 style="font-size: 1.5rem; font-weight: 900;">Optipyme Solutions</h3>
+                            <p style="color: #93c5fd;">Tecnología que transforma empresas</p>
+                        </div>
+                    </div>
+                    
+                    <p style="color: #d1d5db; line-height: 1.6; max-width: 28rem; margin: 0 auto 1.5rem;">
+                        Líderes en soluciones tecnológicas empresariales. Más de una década transformando 
+                        negocios con telefonía avanzada, optimización energética y seguridad.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">
+                        ¿Listo para transformar tu empresa?
+                    </h4>
+                    <a href="mailto:optipymesolutions@gmail.com?subject=Solicitud de Consulta Gratuita&body=Hola, me gustaría solicitar una consulta gratuita para mi empresa." class="footer-cta-button">
+                        📧 Solicita tu Consulta Gratuita
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div style="text-align: center;">
+                    <p style="color: #9ca3af; margin-bottom: 0.5rem;">
+                        © 2025 Optipyme Solutions. Todos los derechos reservados.
+                    </p>
+                    <div class="footer-links">
+                        <a href="/privacidad">Política de Privacidad</a>
+                        <a href="/terminos">Términos de Uso</a>
+                        <a href="/cookies">Cookies</a>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://wa.me/34641119677" class="social-link whatsapp">📱</a>
+                    <a href="https://www.instagram.com/optipymesolutions/" class="social-link instagram">📷</a>
+                    <a href="mailto:optipymesolutions@gmail.com" class="social-link email">📧</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
